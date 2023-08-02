@@ -25,7 +25,7 @@ namespace cs_m7._1 {
         /// <summary>
         /// Reads the file and returns next available ID
         /// </summary>
-        /// <returns></returns>
+        /// <returns>ID for the next record</returns>
         public int GetNextId() {
             string[] lines = File.ReadAllLines(filePath);
 
@@ -48,7 +48,7 @@ namespace cs_m7._1 {
         /// <summary>
         /// Reads the file and returns all records as an array
         /// </summary>
-        /// <returns></returns>
+        /// <returns>An array of Worker struct</returns>
         public Worker[] GetAllWorkers() {
             string[] lines = File.ReadAllLines(filePath);
             Worker[] workers = new Worker[lines.Length];
@@ -72,8 +72,8 @@ namespace cs_m7._1 {
         /// <summary>
         /// Runs GetAllWorkers and returns an employee by ID
         /// </summary>
-        /// <param name="id"></param>
-        /// <returns></returns>
+        /// <param name="id">ID of the target worker</param>
+        /// <returns>Worker</returns>
         public Worker GetWorkerById(int id) {
             string[] lines = File.ReadAllLines(filePath);
             foreach(string line in lines) {
@@ -97,9 +97,9 @@ namespace cs_m7._1 {
         }
 
         /// <summary>
-        /// Runs GetAllWorkers and copies all the data to the temp array excluding an employee to remove, then writes temp array to the file
+        /// Runs GetAllWorkers and copies all the data to the temp array excluding a worker to remove, then writes temp array to the file
         /// </summary>
-        /// <param name="id"></param>
+        /// <param name="id">ID of the worker to remove</param>
         public void DeleteWorker(int id) {
             Worker[] workers = GetAllWorkers();
             Worker[] tempWorkers = new Worker[workers.Length - 1];
@@ -142,7 +142,7 @@ namespace cs_m7._1 {
         /// </summary>
         /// <param name="dateFrom">Start date</param>
         /// <param name="dateTo">End date</param>
-        /// <returns></returns>
+        /// <returns>A filtered array of Worker struct</returns>
         public Worker[] GetWorkersBetweenTwoDates(DateTime dateFrom, DateTime dateTo) {
             Worker[] workers = GetAllWorkers();
             Worker[] tempWorkers = new Worker[0];
@@ -159,7 +159,7 @@ namespace cs_m7._1 {
         /// <summary>
         /// ReWrites the file with the new data
         /// </summary>
-        /// <param name="workers"></param>
+        /// <param name="workers">Array of struct Worker</param>
         private void SaveWorkersToFile(Worker[] workers) {
             if (File.Exists(filePath))
                 File.Delete(filePath);
@@ -213,8 +213,7 @@ namespace cs_m7._1 {
         /// Sort an array by a field
         /// </summary>
         /// <param name="arrayToSort"></param>
-        /// <param name="sort"></param>
-        /// <returns></returns>
+        /// <returns>A sorted array of Worker struct</returns>
         public Worker[] SortBy(Worker[] arrayToSort) {
             int sort = 0;
             Console.WriteLine("Укажите сортировку");
