@@ -148,7 +148,7 @@ namespace cs_m7._1 {
             Worker[] tempWorkers = new Worker[0];
 
             foreach(Worker worker in workers) {
-                if(worker.creationDate >= dateFrom && worker.creationDate <= dateTo) {
+                if(worker.creationDate >= dateFrom && worker.creationDate <= dateTo.AddDays(1)) {
                     Array.Resize(ref tempWorkers, tempWorkers.Length + 1);
                     tempWorkers[tempWorkers.Length - 1] = worker;
                 }
@@ -207,50 +207,6 @@ namespace cs_m7._1 {
                 $"{worker.height,7} " +
                 $"{worker.birthdate.ToShortDateString(),15} " +
                 $"{worker.birthplace,15}");
-        }
-
-        /// <summary>
-        /// Sort an array by a field
-        /// </summary>
-        /// <param name="arrayToSort"></param>
-        /// <returns>A sorted array of Worker struct</returns>
-        public Worker[] SortBy(Worker[] arrayToSort) {
-            int sort = 0;
-            Console.WriteLine("Укажите сортировку");
-            Console.WriteLine("По дате добавления - 1");
-            Console.WriteLine("По ФИО - 2");
-            Console.WriteLine("По возрасту - 3");
-            Console.WriteLine("По росту - 4");
-            Console.WriteLine("По дате рождения - 5");
-            Console.WriteLine("По месту рождения - 6");
-            Console.WriteLine("По умолчанию - 0");
-            Console.Write("Ваш выбор: ");
-            sort = int.Parse(Console.ReadLine());
-
-            switch (sort) {
-                case 1:
-                    Array.Sort(arrayToSort, (x, y) => x.creationDate.CompareTo(y.creationDate));
-                    break;
-                case 2:
-                    Array.Sort(arrayToSort, (x, y) => x.fullName.CompareTo(y.fullName));
-                    break;
-                case 3:
-                    Array.Sort(arrayToSort, (x, y) => x.age.CompareTo(y.age));
-                    break;
-                case 4:
-                    Array.Sort(arrayToSort, (x, y) => x.height.CompareTo(y.height));
-                    break;
-                case 5:
-                    Array.Sort(arrayToSort, (x, y) => x.birthdate.CompareTo(y.birthdate));
-                    break;
-                case 6:
-                    Array.Sort(arrayToSort, (x, y) => x.birthplace.CompareTo(y.birthplace));
-                    break;
-                case 0:
-                default:
-                    break;
-            }
-            return arrayToSort;
         }
 
     }

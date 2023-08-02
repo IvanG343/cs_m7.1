@@ -46,7 +46,7 @@ namespace cs_m7._1 {
 
                 if (userInputIsNum && userChoice == 2) {
                     Worker[] workersToPrint = rep.GetAllWorkers();
-                    Worker[] sortedArray = rep.SortBy(workersToPrint);
+                    Worker[] sortedArray = SortBy(workersToPrint);
 
                     if (workersToPrint.Length == 0) {
                         RefreshProgramWindow("Файл пуст. Нажмите Enter для возврата в меню");
@@ -83,7 +83,7 @@ namespace cs_m7._1 {
                     dateTo = Convert.ToDateTime(Console.ReadLine());
 
                     Worker[] workersToPrint = rep.GetWorkersBetweenTwoDates(dateFrom, dateTo);
-                    Worker[] sortedArray = rep.SortBy(workersToPrint);
+                    Worker[] sortedArray = SortBy(workersToPrint);
 
                     if (workersToPrint.Length == 0) {
                         RefreshProgramWindow("Файл пуст. Нажмите Enter для возврата в меню");
@@ -109,6 +109,45 @@ namespace cs_m7._1 {
                 Console.WriteLine("\n" + str);
                 Console.ReadKey();
                 Console.Clear();
+            }
+
+            Worker[] SortBy(Worker[] arrayToSort) {
+                int sort = 0;
+                Console.WriteLine("Укажите сортировку");
+                Console.WriteLine("По дате добавления - 1");
+                Console.WriteLine("По ФИО - 2");
+                Console.WriteLine("По возрасту - 3");
+                Console.WriteLine("По росту - 4");
+                Console.WriteLine("По дате рождения - 5");
+                Console.WriteLine("По месту рождения - 6");
+                Console.WriteLine("По умолчанию - 0");
+                Console.Write("Ваш выбор: ");
+                sort = int.Parse(Console.ReadLine());
+
+                switch (sort) {
+                    case 1:
+                        Array.Sort(arrayToSort, (x, y) => x.creationDate.CompareTo(y.creationDate));
+                        break;
+                    case 2:
+                        Array.Sort(arrayToSort, (x, y) => x.fullName.CompareTo(y.fullName));
+                        break;
+                    case 3:
+                        Array.Sort(arrayToSort, (x, y) => x.age.CompareTo(y.age));
+                        break;
+                    case 4:
+                        Array.Sort(arrayToSort, (x, y) => x.height.CompareTo(y.height));
+                        break;
+                    case 5:
+                        Array.Sort(arrayToSort, (x, y) => x.birthdate.CompareTo(y.birthdate));
+                        break;
+                    case 6:
+                        Array.Sort(arrayToSort, (x, y) => x.birthplace.CompareTo(y.birthplace));
+                        break;
+                    case 0:
+                    default:
+                        break;
+                }
+                return arrayToSort;
             }
 
         }
